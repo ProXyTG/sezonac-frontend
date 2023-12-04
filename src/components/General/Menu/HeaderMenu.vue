@@ -39,7 +39,7 @@ export default defineComponent({
 				{
 					value: 'Kontakt',
 					route: '/contact-us'
-				},
+				},				
 			]
 		}
 	},
