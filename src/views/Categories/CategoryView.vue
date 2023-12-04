@@ -8,6 +8,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
+//Endpoints
+import { getJobs } from '@/api/dbApi'
 //Components
 import SearchBar from '@/components/General/TextFields/SearchBar.vue'
 
@@ -29,8 +31,13 @@ export default defineComponent({
 		}
 	},
 	created() {
-		this.currentCategory = this.route.query.category
-	}
+    this.fetchJobs()
+	},
+  methods: {
+    async fetchJobs() {
+      const data = await (await getJobs()).data
+    }
+  }
 })
 </script>
 
