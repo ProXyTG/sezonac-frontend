@@ -1,18 +1,23 @@
+//Main
 import { createApp } from 'vue'
-import App from './App.vue'
 import router from './router'
+import App from './App.vue'
 
+//Css
 import '@/assets/scss/main.scss'
+
+//MaterialDesign
+import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
+import "@fortawesome/fontawesome-free/css/all.css";
+
+//Store
+import { store } from './store'
 
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-
-// make sure to also import the coresponding css
-import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
-import "@fortawesome/fontawesome-free/css/all.css";
 
 const vuetify = createVuetify({
 	theme: {
@@ -27,6 +32,7 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
+app.use(store)
 app.use(router)
 app.use(vuetify)
 

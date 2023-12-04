@@ -2,16 +2,21 @@
 	<div class="categoryView">
 		Category {{ currentCategory }}
     <SearchBar />
+
+		{{ jobs }}
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-//Endpoints
-import { getJobs } from '@/api/dbApi'
+//Interfaces & Enums
+import { type StoreInterface } from '@/store/index'
+import { JobStateActions } from '@/types/enums/Job'
 //Components
 import SearchBar from '@/components/General/TextFields/SearchBar.vue'
+import { computed } from 'vue'
 
 export default defineComponent({
 	name: 'CategoryView',
@@ -24,20 +29,18 @@ export default defineComponent({
 		}
 	},
 	setup() {
+		const store: StoreInterface = useStore()
 		const route = useRoute()
 
 		return {
-			route
+			route,
+			jobs: computed(() => store.state.jobs),
+			fetchJobs: () => store.dispatch(JobStateActions.fetchJobs),
 		}
 	},
-	created() {
-    this.fetchJobs()
-	},
-  methods: {
-    async fetchJobs() {
-      const data = await (await getJobs()).data
-    }
-  }
+	async created() {
+		await this.fetchJobs()
+	}
 })
 </script>
 
