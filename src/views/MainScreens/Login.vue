@@ -1,13 +1,12 @@
 <template>
-	<div>About Us</div>
-	<v-icon icon="mdi-home" />
+	<div>Login</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-	name: 'AboutUs'
+	name: 'ContactUs'
 })
 </script>
 
