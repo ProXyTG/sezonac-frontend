@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/MainScreens/HomeView.vue'
 import AboutUs from '@/views/MainScreens/AboutUs.vue'
 import ContactUs from '@/views/MainScreens/ContactUs.vue'
-import Login from '@/views/MainScreens/Login.vue'
 //DetailScreens
 import CategoryView from '@/views/Categories/CategoryView.vue'
 
@@ -29,11 +28,6 @@ const router = createRouter({
       path: '/category',
       name: 'Category',
       component: CategoryView
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
     },
   ]
 })

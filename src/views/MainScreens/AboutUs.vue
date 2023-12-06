@@ -1,6 +1,5 @@
 <template>
 	<div>About Us</div>
-	<v-icon icon="mdi-home" />
 </template>
 
 <script lang="ts">
