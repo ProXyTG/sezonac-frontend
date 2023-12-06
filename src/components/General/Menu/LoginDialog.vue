@@ -12,7 +12,9 @@
 					<v-container>
 						<v-form fast-fail @submit.prevent>
 							<div class="text-subtitle-1 text-medium-emphasis">Email adresa</div>
-								<v-text-field   
+								<v-text-field  
+									v-model="email.value.value"
+									:error-messages="email.errorMessage.value"
 									density="compact"
 									placeholder="Email adresa"
 									prepend-inner-icon="mdi-email-outline"
@@ -30,6 +32,8 @@
 							</div>
 
 							<v-text-field
+								v-model="password.value.value"
+								:error-messages="password.errorMessage.value"
 								:append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
 								:type="visible ? 'text' : 'password'"
 								density="compact"
@@ -48,7 +52,7 @@
 								</v-card-text>
 							</v-card>
 
-							<v-btn block class="mb-8" color="blue" size="large" variant="tonal">
+							<v-btn @click="submit" block class="mb-8" color="blue" size="large" variant="tonal">
 								Prijava
 							</v-btn>
 
@@ -98,6 +102,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import { useField, useForm } from 'vee-validate'
+
 export default defineComponent({
 	name: 'ContactUs',
 	data () {
@@ -107,6 +113,30 @@ export default defineComponent({
 		visible: false,
       }
     },
+	setup() {
+		const {handleSubmit, handleReset } = useForm({
+			validationSchema: {
+				password(value: string) {
+					if (value?.length >8) return true
+					return 'Password needs to be at least 8 characters.'
+				},
+				email(value: string) {
+        			if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+
+        			return 'Must be a valid e-mail.'
+      			},
+			}
+		})
+		const password = useField('password')
+		const email = useField('email')
+// here put submit logic
+		const submit = handleSubmit(values => {
+    		alert(JSON.stringify(values, null, 2))
+  })
+  return {
+	password, email, submit, handleReset,
+  }
+	}
 })
 </script>
 
