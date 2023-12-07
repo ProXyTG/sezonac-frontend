@@ -14,7 +14,6 @@
 				>
 					{{ tab.value }}
 				</v-tab>
-				<LoginDialog></LoginDialog>
 			</v-tabs>
 		</div>
 	</div>
@@ -24,13 +23,10 @@
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 //Components
-import LoginDialog from '@/components/General/Menu/LoginDialog.vue'
+
 
 export default defineComponent({
 	name: 'HeaderMenu',
-	components: {
-		LoginDialog
-	},
 	data() {
 		return {
 			tabs: [
@@ -45,6 +41,10 @@ export default defineComponent({
 				{
 					value: 'Kontakt',
 					route: '/contact-us'
+				},
+				{
+					value: 'Prijavi se',
+					route: '/login'
 				},
 			],
 			dialog: false,
