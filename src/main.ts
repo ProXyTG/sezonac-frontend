@@ -19,6 +19,24 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
+//Appolo
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
+import { createApolloProvider } from '@vue/apollo-option'
+
+
+const httpLink = createHttpLink({
+  uri: 'https://blue-surf-1230260.us-east-1.aws.cloud.dgraph.io/graphql',
+})
+const cache = new InMemoryCache()
+const apolloClient = new ApolloClient({
+  link: httpLink,
+  cache,
+})
+
+const apolloProvider = createApolloProvider({
+  defaultClient: apolloClient,
+})
+
 const vuetify = createVuetify({
 	theme: {
 	  defaultTheme: "light",
@@ -35,5 +53,6 @@ const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(vuetify)
+app.use(apolloProvider)
 
 app.mount('#app')
